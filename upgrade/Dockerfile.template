@@ -1,0 +1,13 @@
+ARG BALENA_ARCH=%%BALENA_ARCH%%
+
+FROM balenalib/$BALENA_ARCH-alpine
+
+RUN install_packages dbus bash coreutils
+
+WORKDIR /app
+
+COPY QFirehose EC21EUXGAR08A07M1G_20.200.20.200.zip VERSION EC21_local_07.sh ./ 
+RUN chmod 755 QFirehose EC21_local_07.sh
+RUN chown root:root QFirehose EC21_local_07.sh
+
+ENTRYPOINT  ["bash","./EC21_local_07.sh"]
